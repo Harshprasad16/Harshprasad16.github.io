@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Harsh Prasad</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0f;
+  --surface:#111118;
+  --surface2:#18181f;
+  --border:rgba(255,255,255,0.08);
+  --text:#f0f0f5;
+  --muted:#7a7a8a;
+  --dim:#3a3a4a;
+  --accent:#7c6fff;
+  --accent2:#a89fff;
+  --green:#00d4a0;
+  --amber:#f59e0b;
+  --coral:#ff6b6b;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden}
+
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black,transparent)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 2rem;background:rgba(10,10,15,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.logo{font-size:18px;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:-0.02em}
+.logo span{color:var(--accent2)}
+.nav-back{font-size:12px;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:color 0.2s;border:1px solid var(--border);padding:6px 16px;border-radius:5px}
+.nav-back:hover{color:var(--text);border-color:rgba(255,255,255,0.2)}
+
+/* HERO */
+.page-hero{padding:9rem 2rem 4rem;position:relative;z-index:1}
+.container{max-width:1060px;margin:0 auto;padding:0 2rem}
+.label{font-size:11px;color:var(--accent2);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1rem}
+.page-title{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;letter-spacing:-0.04em;line-height:1;margin-bottom:1rem}
+.page-title .ghost{color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,0.18)}
+.page-sub{font-size:15px;color:var(--muted);max-width:500px;line-height:1.75}
+
+/* JUMP LINKS */
+.jump-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:2rem}
+.jump-link{font-size:12px;color:var(--muted);text-decoration:none;border:1px solid var(--border);padding:7px 16px;border-radius:6px;transition:all 0.2s;letter-spacing:0.04em}
+.jump-link:hover{color:var(--text);border-color:rgba(255,255,255,0.2);background:var(--surface)}
+
+/* PROJECT SECTION */
+.proj-section{position:relative;z-index:1;padding:3rem 0 5rem}
+.proj-section + .proj-section{border-top:1px solid var(--border)}
+
+.proj-header{display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start;margin-bottom:3rem}
+.proj-badge{display:flex;flex-direction:column;align-items:center;gap:0.6rem}
+.proj-num-big{font-size:11px;color:var(--dim);letter-spacing:0.12em}
+.proj-ico-big{width:72px;height:72px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:34px;border:1px solid var(--border);flex-shrink:0}
+.proj-meta{}
+.proj-category{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;font-weight:600}
+.proj-name{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;letter-spacing:-0.04em;line-height:1;margin-bottom:0.75rem}
+.proj-tagline{font-size:15px;color:var(--muted);line-height:1.7;max-width:600px;margin-bottom:1.25rem}
+.proj-chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:11px;padding:4px 11px;border-radius:4px;border:1px solid var(--border);color:var(--muted)}
+
+/* CONTENT BLOCKS */
+.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px}
+.content-block{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.75rem}
+.block-title{font-size:11px;font-weight:600;color:var(--accent2);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;display:flex;align-items:center;gap:8px}
+.block-title::before{content:'';display:inline-block;width:20px;height:1px;background:var(--accent2)}
+.block-text{font-size:13px;color:var(--muted);line-height:1.8}
+.block-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.block-list li{font-size:13px;color:var(--muted);padding-left:1.2rem;position:relative;line-height:1.6}
+.block-list li::before{content:'→';position:absolute;left:0;color:var(--accent2);font-size:11px;top:2px}
+
+.content-full{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.75rem;margin-bottom:24px}
+
+/* OUTCOME PILLS */
+.outcome-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:1rem}
+.outcome-pill{display:inline-flex;align-items:center;gap:8px;font-size:12px;background:var(--surface2);border:1px solid var(--border);padding:8px 16px;border-radius:8px;color:var(--text)}
+.outcome-pill .o-icon{font-size:16px}
+
+/* TECH STACK */
+.stack-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:0.5rem}
+.stack-item{font-size:12px;padding:5px 13px;border-radius:5px;font-weight:500}
+
+/* ACTIONS */
+.proj-actions-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:2rem}
+.btn-primary{display:inline-flex;align-items:center;gap:7px;font-size:13px;background:var(--accent);color:#fff;padding:10px 22px;border-radius:6px;text-decoration:none;letter-spacing:0.03em;border:1px solid var(--accent);transition:all 0.2s}
+.btn-primary:hover{background:var(--accent2);border-color:var(--accent2);transform:translateY(-1px)}
+.btn-outline{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--muted);padding:10px 22px;border-radius:6px;text-decoration:none;letter-spacing:0.03em;border:1px solid var(--border);transition:all 0.2s}
+.btn-outline:hover{color:var(--text);border-color:rgba(255,255,255,0.25);transform:translateY(-1px)}
+
+/* DIVIDER LINE */
+hr.divider{border:none;border-top:1px solid var(--border);margin:0;position:relative;z-index:1}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:1.75rem 2rem;display:flex;justify-content:space-between;align-items:center;max-width:1060px;margin:0 auto;position:relative;z-index:1}
+.foot-copy{font-size:12px;color:var(--dim)}
+.foot-back{font-size:12px;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.foot-back:hover{color:var(--text)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:1rem 1.25rem}
+  .page-hero{padding:7rem 1.25rem 3rem}
+  .container{padding:0 1.25rem}
+  .proj-header{grid-template-columns:1fr;gap:1.25rem}
+  .content-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:0.5rem;text-align:center;padding:1.5rem 1.25rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">HP<span>.</span></a>
+  <a href="index.html" class="nav-back">← Back to Portfolio</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="label reveal">// project showcase</div>
+    <h1 class="page-title reveal">Things I've<br><span class="ghost">built.</span></h1>
+    <p class="page-sub reveal">A detailed look at my projects — the problem, the approach, challenges I faced, and outcomes achieved.</p>
+    <div class="jump-links reveal">
+      <a href="#neuroclass" class="jump-link">🧠 Neuroclass.AI</a>
+      <a href="#safex" class="jump-link">🪖 SafeX Riding</a>
+      <a href="#fasten" class="jump-link">♿ Fasten</a>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- PROJECT 1: NEUROCLASS.AI -->
+<section id="neuroclass" class="proj-section">
+  <div class="container">
+    <div class="proj-header reveal">
+      <div class="proj-badge">
+        <div class="proj-num-big">01</div>
+        <div class="proj-ico-big" style="background:rgba(124,111,255,0.1);border-color:rgba(124,111,255,0.25)">🧠</div>
+      </div>
+      <div class="proj-meta">
+        <div class="proj-category" style="color:#7c6fff">AI / Computer Vision</div>
+        <div class="proj-name">Neuroclass.AI</div>
+        <p class="proj-tagline">An AI-powered classroom analytics platform that monitors and analyzes student engagement in real time using computer vision — tracking attention levels, participation patterns, and classroom interactions.</p>
+        <div class="proj-chips">
+          <span class="chip">Python</span>
+          <span class="chip">Computer Vision</span>
+          <span class="chip">AI/ML</span>
+          <span class="chip">Analytics</span>
+          <span class="chip">Real-Time Processing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid reveal">
+      <div class="content-block">
+        <div class="block-title">Problem Statement</div>
+        <p class="block-text">Teachers in large classrooms struggle to gauge student engagement manually. Passive or distracted students often go unnoticed until it's too late — affecting academic outcomes. There was no affordable, automated system to quantify classroom attention in real time.</p>
+      </div>
+      <div class="content-block">
+        <div class="block-title">My Approach</div>
+        <ul class="block-list">
+          <li>Built a computer vision pipeline using Python to detect faces and track gaze direction from a webcam feed.</li>
+          <li>Designed attention scoring logic based on head pose estimation and eye tracking metrics.</li>
+          <li>Created a dashboard layer to visualize engagement trends per student over a session.</li>
+          <li>Optimized inference speed to run in near real-time on standard hardware.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-full reveal">
+      <div class="block-title">Challenges Faced</div>
+      <ul class="block-list">
+        <li>Handling varying lighting conditions in classroom environments which significantly impacted face detection accuracy.</li>
+        <li>Reducing false positives in attention scoring when students were looking at notes vs looking away from the screen.</li>
+        <li>Balancing real-time processing speed with model accuracy — had to optimize the pipeline to avoid frame drops.</li>
+        <li>Designing a meaningful "engagement score" metric that was statistically reliable and not misleading to educators.</li>
+      </ul>
+    </div>
+
+    <div class="content-block reveal" style="margin-bottom:24px">
+      <div class="block-title">Tech Stack</div>
+      <div class="stack-grid">
+        <span class="stack-item" style="background:rgba(124,111,255,0.1);border:1px solid rgba(124,111,255,0.25);color:#a89fff">Python</span>
+        <span class="stack-item" style="background:rgba(0,212,160,0.08);border:1px solid rgba(0,212,160,0.2);color:#00d4a0">OpenCV</span>
+        <span class="stack-item" style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);color:#f59e0b">MediaPipe</span>
+        <span class="stack-item" style="background:rgba(255,107,107,0.08);border:1px solid rgba(255,107,107,0.2);color:#ff6b6b">NumPy</span>
+        <span class="stack-item" style="background:rgba(124,111,255,0.1);border:1px solid rgba(124,111,255,0.25);color:#a89fff">Matplotlib</span>
+      </div>
+    </div>
+
+    <div class="content-block reveal" style="margin-bottom:24px">
+      <div class="block-title">Outcomes & Impact</div>
+      <div class="outcome-row">
+        <div class="outcome-pill"><span class="o-icon">📊</span> Real-time engagement tracking built</div>
+        <div class="outcome-pill"><span class="o-icon">🎯</span> Attention scoring system implemented</div>
+        <div class="outcome-pill"><span class="o-icon">⚡</span> Near real-time processing achieved</div>
+        <div class="outcome-pill"><span class="o-icon">🏫</span> Applicable to any classroom setup</div>
+      </div>
+    </div>
+
+    <div class="proj-actions-row reveal">
+      <a href="https://github.com/Harshprasad16" target="_blank" class="btn-primary">⌥ View on GitHub</a>
+      <a href="#safex" class="btn-outline">Next Project →</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PROJECT 2: SAFEX RIDING -->
+<section id="safex" class="proj-section">
+  <div class="container">
+    <div class="proj-header reveal">
+      <div class="proj-badge">
+        <div class="proj-num-big">02</div>
+        <div class="proj-ico-big" style="background:rgba(0,212,160,0.1);border-color:rgba(0,212,160,0.25)">🪖</div>
+      </div>
+      <div class="proj-meta">
+        <div class="proj-category" style="color:#00d4a0">IoT / Hardware</div>
+        <div class="proj-name">SafeX Riding</div>
+        <p class="proj-tagline">A hardware-based road safety system where a motorcycle starts only when the rider wears a helmet. Led a 6-member team to design and implement a sensor-based safety mechanism.</p>
+        <div class="proj-chips">
+          <span class="chip">IoT</span>
+          <span class="chip">Sensors</span>
+          <span class="chip">Hardware</span>
+          <span class="chip">Team Lead</span>
+          <span class="chip">Embedded Systems</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid reveal">
+      <div class="content-block">
+        <div class="block-title">Problem Statement</div>
+        <p class="block-text">Helmet non-compliance is one of the leading causes of fatal motorcycle accidents in India. Despite laws mandating helmet use, enforcement is inconsistent. The goal was to build a system that makes it physically impossible to ride without wearing one — enforced at the ignition level.</p>
+      </div>
+      <div class="content-block">
+        <div class="block-title">My Approach</div>
+        <ul class="block-list">
+          <li>Designed a pressure/contact sensor circuit embedded inside a helmet to detect when it is properly worn.</li>
+          <li>Integrated the sensor signal with a microcontroller (Arduino) that controls the motorcycle's ignition relay.</li>
+          <li>Engineered failsafe logic to prevent false positives (e.g., helmet placed on seat but not worn).</li>
+          <li>Led a cross-functional 6-member team covering hardware wiring, embedded coding, and prototype testing.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-full reveal">
+      <div class="block-title">Challenges Faced</div>
+      <ul class="block-list">
+        <li>Distinguishing between "helmet worn" and "helmet held" — required combining pressure and strap-clip detection logic.</li>
+        <li>Ensuring the ignition relay circuit was safe and did not interfere with existing motorcycle electronics.</li>
+        <li>Waterproofing the sensor assembly to make it viable for all weather conditions.</li>
+        <li>Coordinating a 6-person team with mixed skill levels across hardware and software components within a tight project timeline.</li>
+      </ul>
+    </div>
+
+    <div class="content-block reveal" style="margin-bottom:24px">
+      <div class="block-title">Tech Stack</div>
+      <div class="stack-grid">
+        <span class="stack-item" style="background:rgba(0,212,160,0.08);border:1px solid rgba(0,212,160,0.2);color:#00d4a0">Arduino</span>
+        <span class="stack-item" style="background:rgba(124,111,255,0.1);border:1px solid rgba(124,111,255,0.25);color:#a89fff">C (Embedded)</span>
+        <span class="stack-item" style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);color:#f59e0b">Relay Module</span>
+        <span class="stack-item" style="background:rgba(255,107,107,0.08);border:1px solid rgba(255,107,107,0.2);color:#ff6b6b">Pressure Sensors</span>
+        <span class="stack-item" style="background:rgba(0,212,160,0.08);border:1px solid rgba(0,212,160,0.2);color:#00d4a0">Circuit Design</span>
+      </div>
+    </div>
+
+    <div class="content-block reveal" style="margin-bottom:24px">
+      <div class="block-title">Outcomes & Impact</div>
+      <div class="outcome-row">
+        <div class="outcome-pill"><span class="o-icon">🛡️</span> Working prototype built & tested</div>
+        <div class="outcome-pill"><span class="o-icon">👥</span> Led 6-member team end-to-end</div>
+        <div class="outcome-pill"><span class="o-icon">🏍️</span> Ignition-level enforcement achieved</div>
+        <div class="outcome-pill"><span class="o-icon">🇮🇳</span> Addresses a real Indian road safety gap</div>
+      </div>
+    </div>
+
+    <div class="proj-actions-row reveal">
+      <a href="https://github.com/Harshprasad16" target="_blank" class="btn-primary">⌥ View on GitHub</a>
+      <a href="#fasten" class="btn-outline">Next Project →</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PROJECT 3: FASTEN -->
+<section id="fasten" class="proj-section">
+  <div class="container">
+    <div class="proj-header reveal">
+      <div class="proj-badge">
+        <div class="proj-num-big">03</div>
+        <div class="proj-ico-big" style="background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.25)">♿</div>
+      </div>
+      <div class="proj-meta">
+        <div class="proj-category" style="color:#f59e0b">Mobility / Accessibility Design</div>
+        <div class="proj-name">Fasten</div>
+        <p class="proj-tagline">An innovative mobility assistance solution designed for elderly and physically challenged individuals. Focused on user safety, accessibility, and ease of movement through practical design concepts.</p>
+        <div class="proj-chips">
+          <span class="chip">Accessibility</span>
+          <span class="chip">Research</span>
+          <span class="chip">Design</span>
+          <span class="chip">Project Lead</span>
+          <span class="chip">User-Centered Design</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid reveal">
+      <div class="content-block">
+        <div class="block-title">Problem Statement</div>
+        <p class="block-text">Elderly and physically challenged individuals often struggle with existing mobility aids that are either too complex, too heavy, or not designed with Indian usage contexts in mind. Falls and mobility-related injuries significantly affect quality of life. There was a clear need for a practical, safe, and user-friendly mobility assistance solution.</p>
+      </div>
+      <div class="content-block">
+        <div class="block-title">My Approach</div>
+        <ul class="block-list">
+          <li>Conducted research into the daily mobility challenges of elderly and physically challenged users through observation and interviews.</li>
+          <li>Analyzed existing solutions (walkers, crutches, motorized scooters) and identified key gaps in usability and safety.</li>
+          <li>Designed a modular mobility aid concept with focus on stability, lightweight build, and adaptability to different environments.</li>
+          <li>Led the project from ideation through prototype design, incorporating feedback loops at each stage.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-full reveal">
+      <div class="block-title">Challenges Faced</div>
+      <ul class="block-list">
+        <li>Balancing structural stability with the need for a lightweight and portable design — most existing aids sacrifice one for the other.</li>
+        <li>Designing for diverse physical conditions (partial paralysis, arthritis, post-surgery recovery) within a single adaptable system.</li>
+        <li>Incorporating safety features (anti-tip mechanism, grip locks) without adding complexity to the user interaction.</li>
+        <li>Working within resource and budget constraints typical of a student design project while maintaining functional fidelity.</li>
+      </ul>
+    </div>
+
+    <div class="content-block reveal" style="margin-bottom:24px">
+      <div class="block-title">Design Focus Areas</div>
+      <div class="stack-grid">
+        <span class="stack-item" style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);color:#f59e0b">User Research</span>
+        <span class="stack-item" style="background:rgba(124,111,255,0.1);border:1px solid rgba(124,111,255,0.25);color:#a89fff">Ergonomics</span>
+        <span class="stack-item" style="background:rgba(0,212,160,0.08);border:1px solid rgba(0,212,160,0.2);color:#00d4a0">Prototype Design</span>
+        <span class="stack-item" style="background:rgba(255,107,107,0.08);border:1px solid rgba(255,107,107,0.2);color:#ff6b6b">Safety Engineering</span>
+        <span class="stack-item" style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);color:#f59e0b">Accessibility Standards</span>
+      </div>
+    </div>
+
+    <div class="content-block reveal" style="margin-bottom:24px">
+      <div class="block-title">Outcomes & Impact</div>
+      <div class="outcome-row">
+        <div class="outcome-pill"><span class="o-icon">♿</span> Prototype design completed</div>
+        <div class="outcome-pill"><span class="o-icon">🔬</span> User research conducted</div>
+        <div class="outcome-pill"><span class="o-icon">🏆</span> Led project from concept to design</div>
+        <div class="outcome-pill"><span class="o-icon">❤️</span> Addresses real accessibility needs</div>
+      </div>
+    </div>
+
+    <div class="proj-actions-row reveal">
+      <a href="https://github.com/Harshprasad16" target="_blank" class="btn-primary">⌥ View on GitHub</a>
+      <a href="#neuroclass" class="btn-outline">↑ Back to Top</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<footer>
+  <span class="foot-copy">© 2025 Harsh Prasad. All rights reserved.</span>
+  <a href="index.html" class="foot-back">← Back to Portfolio</a>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if(e.isIntersecting) setTimeout(() => e.target.classList.add('in'), i * 70);
+  });
+}, {threshold: 0.1});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
