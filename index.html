@@ -252,6 +252,7 @@ footer{border-top:1px solid var(--border);padding:1.75rem 2rem;display:flex;just
       <div class="reveal">
         <div class="label">// by the numbers</div>
         <div class="stats">
+          <div class="shadow-stat"></div>
           <div class="stat"><div class="stat-n">3<span>+</span></div><div class="stat-l">projects shipped</div></div>
           <div class="stat"><div class="stat-n">5<span>+</span></div><div class="stat-l">languages known</div></div>
           <div class="stat"><div class="stat-n">2</div><div class="stat-l">certifications</div></div>
@@ -412,20 +413,25 @@ footer{border-top:1px solid var(--border);padding:1.75rem 2rem;display:flex;just
     <p class="contact-sub reveal">Open to internships, collaborations, and exciting projects. Drop me a message anytime!</p>
     
     <div class="form-container reveal">
-      <form id="portfolioContactForm">
+      <form id="portfolioContactForm" action="https://api.web3forms.com/submit" method="POST">
+        
+        <input type="hidden" name="access_key" value="752421ed-4641-41e2-a681-06cc7dd25075">
+        
+        <input type="hidden" name="redirect" value="https://harshprasad16.github.io">
+
         <div class="form-group">
-          <label for="clientName">Your Name</label>
-          <input type="text" id="clientName" placeholder="Enter your full name" required />
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your full name" required />
         </div>
         
         <div class="form-group">
-          <label for="clientEmail">Your Email</label>
-          <input type="email" id="clientEmail" placeholder="Enter your email address" required />
+          <label for="email">Your Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email address" required />
         </div>
         
         <div class="form-group">
-          <label for="clientMessage">Your Message</label>
-          <textarea id="clientMessage" placeholder="Type your message here..." required></textarea>
+          <label for="message">Your Message</label>
+          <textarea id="message" name="message" placeholder="Type your message here..." required></textarea>
         </div>
         
         <button type="submit" id="submitBtn" class="submit-btn">Send Message</button>
@@ -455,53 +461,27 @@ const obs = new IntersectionObserver((entries) => {
 }, {threshold: 0.1});
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// Live Cloud Contact Engine Automation
-const contactForm = document.getElementById('portfolioContactForm');
-const submitBtn = document.getElementById('submitBtn');
+// Interception and submission workflow automation
+window.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.getElementById('portfolioContactForm');
+    const submitBtn = document.getElementById('submitBtn');
 
-if (contactForm) {
-    contactForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
+    if (contactForm) {
+        // Clearing any old lingering JS hooks natively 🛑
+        contactForm.onsubmit = null;
 
-        if (submitBtn) {
-            submitBtn.innerText = "SENDING ENCRYPTED PAYLOAD...";
-            submitBtn.disabled = true;
-        }
+        contactForm.addEventListener('submit', function (event) {
+            // Hard blocks the old Nodemailer/Render scripts from catching the event
+            event.stopPropagation();
 
-        const payload = {
-            name: document.getElementById('clientName').value,
-            email: document.getElementById('clientEmail').value,
-            message: document.getElementById('clientMessage').value
-        };
-
-        try {
-            const response = await fetch('https://portfolio-backend-3ilg.onrender.com/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                alert("Message routed securely through the live cloud server! 🎉");
-                contactForm.reset();
-            } else {
-                alert("Cloud transmission failed: " + data.error);
-            }
-        } catch (error) {
-            console.error("Transmission Error: ", error);
-            alert("Could not connect to the cloud engine. Please check your network connection.");
-        } finally {
             if (submitBtn) {
-                submitBtn.innerText = "Send Message";
-                submitBtn.disabled = false;
+                submitBtn.innerText = "SENDING SECURELY... 🚀";
+                submitBtn.style.background = "#3a3a4a";
             }
-        }
-    });
-}
+            console.log("Transmission routing successfully hijacked by Web3Forms.");
+        }, { capture: true }); // Captures event early before old script can touch it
+    }
+});
 </script>
 
 </body></html>
